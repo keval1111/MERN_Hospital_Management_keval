@@ -1,9 +1,3 @@
-/**
- * Authentication Service
- * Implements Unified Multi-Role Authentication, Password Management & OTP Flows
- * Uses parameterized queries only. Never exposes password_hash or OTP.
- */
-
 const { pool } = require('../config/db');
 const { ROLES, ROLE_IDS } = require('../config/constants');
 const { hashPassword, comparePassword } = require('../helpers/password');
@@ -13,9 +7,7 @@ const { sendMail, getOtpEmailTemplate } = require('../helpers/mailer');
 const logger = require('../config/logger');
 
 const authService = {
-  /**
-   * Unified Login across Super Admin, Hospital Admin, Doctor, Staff, Patient
-   */
+
   async login({ email, password, roleHint }) {
     const cleanEmail = email.trim().toLowerCase();
 
@@ -235,9 +227,6 @@ const authService = {
     throw new Error('Invalid email or password credentials.');
   },
 
-  /**
-   * Patient Registration Flow
-   */
   async registerPatient({ full_name, email, mobile_number, password, gender, date_of_birth, blood_group }) {
     const cleanEmail = email.trim().toLowerCase();
 
@@ -287,9 +276,6 @@ const authService = {
     };
   },
 
-  /**
-   * Password Change (Mandatory when is_temporary_password = 1)
-   */
   async changePassword({ userId, role, oldPassword, newPassword }) {
     let tableName = '';
     if (role === ROLES.SUPER_ADMIN) tableName = 'tbl_super_admin';
@@ -331,9 +317,6 @@ const authService = {
     return { success: true };
   },
 
-  /**
-   * Forgot Password - Request 6-digit OTP
-   */
   async requestPasswordResetOtp(email) {
     const cleanEmail = email.trim().toLowerCase();
     const otp = generateOtp();
@@ -384,9 +367,6 @@ const authService = {
     return { success: true, message: 'Verification OTP has been dispatched to your email.' };
   },
 
-  /**
-   * Verify OTP
-   */
   async verifyOtp({ email, otp }) {
     const cleanEmail = email.trim().toLowerCase();
     const tables = ['tbl_super_admin', 'tbl_admin', 'tbl_doctors', 'tbl_staffs', 'tbl_patients'];
@@ -411,9 +391,6 @@ const authService = {
     throw new Error('User not found.');
   },
 
-  /**
-   * Reset Password with Verified OTP
-   */
   async resetPasswordWithOtp({ email, otp, newPassword }) {
     const cleanEmail = email.trim().toLowerCase();
     const tables = ['tbl_super_admin', 'tbl_admin', 'tbl_doctors', 'tbl_staffs', 'tbl_patients'];

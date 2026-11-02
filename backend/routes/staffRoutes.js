@@ -1,8 +1,3 @@
-/**
- * Hospital Staff Route Skeletons
- * Restricted to Staff role (Receptionist, Nurse, Lab, etc.)
- */
-
 const express = require('express');
 const router = express.Router();
 const authenticate = require('../middleware/auth');

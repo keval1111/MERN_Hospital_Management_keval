@@ -1,8 +1,3 @@
-/**
- * Master Data Route Skeletons
- * Provides read access to public/authenticated users and write access to Super Admin
- */
-
 const express = require('express');
 const router = express.Router();
 const authenticate = require('../middleware/auth');

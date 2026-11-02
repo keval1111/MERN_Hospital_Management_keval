@@ -1,8 +1,3 @@
-/**
- * Patient Portal Route Skeletons
- * Restricted to Patient role
- */
-
 const express = require('express');
 const router = express.Router();
 const authenticate = require('../middleware/auth');

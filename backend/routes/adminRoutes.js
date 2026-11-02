@@ -1,8 +1,3 @@
-/**
- * Hospital Admin Route Skeletons
- * Restricted to Hospital Admin role and isolated by tenantGuard
- */
-
 const express = require('express');
 const router = express.Router();
 const authenticate = require('../middleware/auth');

@@ -1,8 +1,3 @@
-/**
- * Appointments Lifecycle Route Skeletons
- * Multi-role accessible endpoints for booking, monitoring and status updates
- */
-
 const express = require('express');
 const router = express.Router();
 const authenticate = require('../middleware/auth');
