@@ -20,9 +20,7 @@ export default function ProtectedRoute({ allowedRoles, children }) {
   if (allowedRoles && allowedRoles.length > 0 && !allowedRoles.includes(role)) {
     // Redirect to respective home dashboard based on role
     if (role === 'Super Admin') return <Navigate to="/superadmin" replace />;
-    if (role === 'Hospital Admin') return <Navigate to="/admin" replace />;
-    if (role === 'Doctor') return <Navigate to="/doctor" replace />;
-    if (role === 'Staff') return <Navigate to="/staff" replace />;
+    if (['Hospital Admin', 'Doctor', 'Staff'].includes(role)) return <Navigate to="/portal" replace />;
     if (role === 'Patient') return <Navigate to="/patient" replace />;
     return <Navigate to="/login" replace />;
   }

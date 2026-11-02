@@ -1,0 +1,12 @@
+{
+  "name": "hospital-management-system",
+  "version": "1.0.0",
+  "description": "Multi-Tenant Hospital Management System with Separate Independent Frontend Folders",
+  "private": true,
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:superadmin": "npm --prefix superadmin run dev",
+    "dev:hospital": "npm --prefix hospital-panel run dev"
+  }
+}

@@ -5,22 +5,12 @@ import ProtectedRoute from './routes/ProtectedRoute';
 
 // Layouts
 import PublicPatientLayout from './layouts/PublicPatientLayout';
-import SuperAdminLayout from './layouts/SuperAdminLayout';
-import HospitalAdminLayout from './layouts/HospitalAdminLayout';
-import DoctorLayout from './layouts/DoctorLayout';
-import StaffLayout from './layouts/StaffLayout';
 
 // Auth Pages
 import LoginPage from './pages/auth/LoginPage';
 import ChangePasswordPage from './pages/auth/ChangePasswordPage';
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
 import ResetPasswordPage from './pages/auth/ResetPasswordPage';
-
-// Dashboards
-import SuperAdminDashboard from './pages/superadmin/SuperAdminDashboard';
-import HospitalAdminDashboard from './pages/admin/HospitalAdminDashboard';
-import DoctorDashboard from './pages/doctor/DoctorDashboard';
-import StaffDashboard from './pages/staff/StaffDashboard';
 
 // Patient Pages
 import PatientLandingPage from './pages/patient/PatientLandingPage';
@@ -61,67 +51,9 @@ export default function App() {
             }
           />
 
-          {/* Super Admin Protected Portal */}
-          <Route
-            path="/superadmin"
-            element={
-              <ProtectedRoute allowedRoles={['Super Admin']}>
-                <SuperAdminLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<SuperAdminDashboard />} />
-            <Route path="hospitals" element={<SuperAdminDashboard />} />
-            <Route path="departments" element={<SuperAdminDashboard />} />
-            <Route path="designations" element={<SuperAdminDashboard />} />
-            <Route path="locations" element={<SuperAdminDashboard />} />
-            <Route path="notifications" element={<SuperAdminDashboard />} />
-          </Route>
-
-          {/* Hospital Admin Protected Portal */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute allowedRoles={['Hospital Admin']}>
-                <HospitalAdminLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<HospitalAdminDashboard />} />
-            <Route path="departments" element={<HospitalAdminDashboard />} />
-            <Route path="doctors" element={<HospitalAdminDashboard />} />
-            <Route path="staff" element={<HospitalAdminDashboard />} />
-            <Route path="appointments" element={<HospitalAdminDashboard />} />
-          </Route>
-
-          {/* Doctor Protected Portal */}
-          <Route
-            path="/doctor"
-            element={
-              <ProtectedRoute allowedRoles={['Doctor']}>
-                <DoctorLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<DoctorDashboard />} />
-            <Route path="today" element={<DoctorDashboard />} />
-            <Route path="waiting-queue" element={<DoctorDashboard />} />
-            <Route path="patients" element={<DoctorDashboard />} />
-          </Route>
-
-          {/* Staff Protected Portal */}
-          <Route
-            path="/staff"
-            element={
-              <ProtectedRoute allowedRoles={['Staff']}>
-                <StaffLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<StaffDashboard />} />
-            <Route path="walk-in" element={<StaffDashboard />} />
-            <Route path="patients" element={<StaffDashboard />} />
-          </Route>
+          {/* Cross-Panel Redirect Hints */}
+          <Route path="/superadmin/*" element={<a href="http://localhost:3001" className="p-8 block text-indigo-400">Please access Super Admin on Port 3001 (Click here)</a>} />
+          <Route path="/portal/*" element={<a href="http://localhost:3002" className="p-8 block text-emerald-400">Please access Hospital Staff Portal on Port 3002 (Click here)</a>} />
 
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />

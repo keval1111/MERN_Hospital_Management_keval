@@ -1,1 +1,36 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Production Build Outputs
+dist/
+**/dist/
+build/
+**/build/
+
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+
+# Logs
+logs/
+**/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Project Specific
 /Project SOP.pdf
+uploads/
+**/uploads/*
+!**/uploads/.gitkeep

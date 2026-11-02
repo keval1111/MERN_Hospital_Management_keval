@@ -25,8 +25,21 @@ const PORT = process.env.PORT || 5000;
 
 // Security & Parsing Middlewares
 app.use(helmet());
+const allowedOrigins = [
+  'http://localhost:3000', // 1. Patient / Public User Frontend
+  'http://localhost:3001', // 2. Super Admin Panel
+  'http://localhost:3002', // 3. Hospital Admin / Doctor / Staff Panel
+  'http://localhost:5173', // Vite unified fallback
+  ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : [])
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
